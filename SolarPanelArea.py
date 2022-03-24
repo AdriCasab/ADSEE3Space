@@ -18,9 +18,12 @@ def PowerRequirement(powerDay, powerNight, efficiencyDay, efficiencyNight, orbit
     powerRequirement = (powerDay*brightnessPeriod/efficiencyDay + powerNight*darknessPeriod/efficiencyNight)/brightnessPeriod
     return powerRequirement
 
+def solarPanelArea(powerRequirement, powerIrridance, solarPanelEfficiency):
+    return powerRequirement/(solarPanelEfficiency*powerIrridance)
 
 
-W = 586.2
+
+MarsW = 586.2
 FlightAltitude = 500*1000
 solarPanelEfficiency = 0.20
 powerDay = 800
@@ -29,4 +32,5 @@ efficiencyDay = 0.4
 efficiencyNight = 0.3
 orbitalPeriod, darknessPeriod = MarsOrbitalPeriod(FlightAltitude)
 powerRequirement = PowerRequirement(powerDay, powerNight, efficiencyDay, efficiencyNight, orbitalPeriod, darknessPeriod)
-print(powerRequirement)
+powerArea = solarPanelArea(powerRequirement, MarsW, solarPanelEfficiency)
+print(powerArea)
